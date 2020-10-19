@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lymin.nexonlinemarket">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NexOnlineMarket">
+        <activity android:name=".view.activity.uploadSale.NewSaleActivity"></activity>
+        <activity android:name=".view.activity.uploadSale.ChooseCategoriesActivity" />
+        <activity android:name=".view.activity.category.ShoppingActivity" />
+        <activity android:name=".view.activity.profile.EditInfoActivity" />
+        <activity android:name=".view.activity.profile.ProfileActivity" />
+        <activity android:name=".view.activity.MainActivity" />
+        <activity android:name=".view.activity.PhoneLoginActivity" />
+        <activity android:name=".view.activity.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.StepperActivity" />
+        <activity android:name=".view.activity.SignUpNameActivity" />
+        <activity android:name=".view.activity.EnableLocationActivity" />
+        <activity android:name=".view.activity.HomeActivity" />
+    </application>
+
+</manifest>

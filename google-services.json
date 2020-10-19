@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "738801632338",
+    "firebase_url": "https://nexonlinestore-2020.firebaseio.com",
+    "project_id": "nexonlinestore-2020",
+    "storage_bucket": "nexonlinestore-2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738801632338:android:9884d04db7995629ea0b8b",
+        "android_client_info": {
+          "package_name": "com.lymin.nexonlinemarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738801632338-khd25mgs676pnedavbji42h0eg4rdl1v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgMjNExlTf3Q9G6B8A3wnoyWSw0D_FGVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738801632338-khd25mgs676pnedavbji42h0eg4rdl1v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
