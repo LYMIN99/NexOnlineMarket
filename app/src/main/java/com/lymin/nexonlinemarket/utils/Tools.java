@@ -1,5 +1,6 @@
 package com.lymin.nexonlinemarket.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -29,6 +30,10 @@ import androidx.core.content.ContextCompat;
 
 import com.lymin.nexonlinemarket.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class Tools {
 
@@ -39,6 +44,28 @@ public class Tools {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(act.getResources().getColor(R.color.colorPrimaryDark));
         }
+    }
+
+
+    public static String getCurrentDate(){
+        Date date = Calendar.getInstance().getTime();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String today = formatter.format(date);
+
+        Calendar currentDateTime = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
+        String currentTime = df.format(currentDateTime.getTime());
+
+        return today+", "+currentTime;
+    }
+
+    public static String getCurrentTime(){
+
+        Calendar currentDateTime = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
+        String currentTime = df.format(currentDateTime.getTime());
+
+        return currentTime;
     }
 
     public static void setSystemBarColor(Activity act, @ColorRes int color) {

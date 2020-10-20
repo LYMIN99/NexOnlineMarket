@@ -50,7 +50,7 @@ public class FirebaseService {
                 });
     }
 
-    public static void uploadImageToFireBaseStorage(Context context,Uri uri, final OnCallBack onCallBack){
+    public static void uploadImageToFireBaseStorage(Context context, Uri uri, final OnCallBack onCallBack){
         StorageReference riversRef = FirebaseStorage.getInstance().getReference().child("Images/Users" + System.currentTimeMillis()+"."+getFileExtention(context,uri));
         riversRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -79,31 +79,6 @@ public class FirebaseService {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    public static UsersModel getUser(String id){
-        final UsersModel[] users = {new UsersModel()};
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("Users").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//
-//            }
-//        });
-
-        DocumentReference docRef = db.collection("Users").document(id);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-            //    Log.d(TAG, "onSuccess: sss "+documentSnapshot.getData().toString());
-                UsersModel city = documentSnapshot.toObject(UsersModel.class);
-                Log.d(TAG, "onSuccess: sss x "+city.getProfile());
-                users[0] = city;
-            }
-        });
-
-
-
-        return users[0];
-    }
 
     public static void getAllUser(){
         final List<UsersModel> users =  new ArrayList<>();

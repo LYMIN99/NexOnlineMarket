@@ -76,10 +76,6 @@ public class EnableLocationActivity extends BaseActivity {
                 progressDialog.dismiss();
             }
 
-            @Override
-            public void onSuccess(String address, com.google.type.LatLng latLng) {
-
-            }
 
             @Override
             public void onPermissionDenied() {

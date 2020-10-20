@@ -8,7 +8,7 @@ public class SaleItem {
     private String sellerID;
     private String thumbnail;
     private String categoryID;
-    private String subCategoryID;
+    private String conditions;
     private String typeID;
     private String productName;
     private String sellerName;
@@ -18,17 +18,19 @@ public class SaleItem {
     private String location;
     private String description;
     private String phoneNumbers;
-    private String condition;
+
+    private double latitude;
+    private double longitude;
 
     public SaleItem() {
     }
 
-    public SaleItem(String id, String sellerID, String thumbnail, String categoryID, String subCategoryID, String typeID, String productName, String sellerName, String price, String dateTime, String time, String location, String description, String phoneNumbers, String condition) {
+    public SaleItem(String id, String sellerID, String thumbnail, String categoryID, String conditions, String typeID, String productName, String sellerName, String price, String dateTime, String time, String location, String description, String phoneNumbers, double latitude, double longitude) {
         this.id = id;
         this.sellerID = sellerID;
         this.thumbnail = thumbnail;
         this.categoryID = categoryID;
-        this.subCategoryID = subCategoryID;
+        this.conditions = conditions;
         this.typeID = typeID;
         this.productName = productName;
         this.sellerName = sellerName;
@@ -38,7 +40,24 @@ public class SaleItem {
         this.location = location;
         this.description = description;
         this.phoneNumbers = phoneNumbers;
-        this.condition = condition;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getId() {
@@ -73,12 +92,12 @@ public class SaleItem {
         this.categoryID = categoryID;
     }
 
-    public String getSubCategoryID() {
-        return subCategoryID;
+    public String getConditions() {
+        return conditions;
     }
 
-    public void setSubCategoryID(String subCategoryID) {
-        this.subCategoryID = subCategoryID;
+    public void setConditions(String conditions) {
+        this.conditions = conditions;
     }
 
     public String getTypeID() {
@@ -153,11 +172,4 @@ public class SaleItem {
         this.phoneNumbers = phoneNumbers;
     }
 
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
 }

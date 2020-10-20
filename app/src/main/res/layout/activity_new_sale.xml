@@ -13,9 +13,9 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/red_500"
+        android:background="@android:color/white"
         app:layout_scrollFlags="scroll|enterAlways"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Light">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -42,6 +42,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -64,6 +65,7 @@
                 android:hint="Title *">
 
                 <EditText
+                    android:id="@+id/ed_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
@@ -79,6 +81,7 @@
                 android:hint="Description *">
 
                 <EditText
+                    android:id="@+id/ed_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
@@ -100,10 +103,12 @@
                     android:hint="Price *">
 
                     <EditText
+                        android:id="@+id/ed_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_text_bg"
                         android:maxLines="1"
+                        android:inputType="number"
                         android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -118,7 +123,68 @@
                     android:text="USD"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/grey_10"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CATEGORY"
+                android:textAlignment="center"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/category_upload"
+                android:layout_width="match_parent"
+                android:background="@drawable/btn_rect_grey_outline"
+                android:padding="15dp"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content">
+
+            </androidx.appcompat.widget.AppCompatSpinner>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TYPE"
+                android:textAlignment="center"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/type_upload"
+                android:layout_width="match_parent"
+                android:background="@drawable/btn_rect_grey_outline"
+                android:padding="15dp"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content">
+            </androidx.appcompat.widget.AppCompatSpinner>
+
+            <TextView
+                android:id="@+id/tv_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TYPE"
+                android:textAlignment="center"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_condition"
+                android:layout_width="match_parent"
+                android:background="@drawable/btn_rect_grey_outline"
+                android:padding="15dp"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content">
+            </androidx.appcompat.widget.AppCompatSpinner>
+
             <Button
+                android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_rounded_primary"

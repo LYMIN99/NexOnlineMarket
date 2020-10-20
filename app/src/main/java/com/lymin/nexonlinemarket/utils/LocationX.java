@@ -93,9 +93,6 @@ public class LocationX {
 
     public interface OnGetLatLngCallBack{
         void onSuccess(String address,LatLng latLng);
-
-        void onSuccess(String address, com.google.type.LatLng latLng);
-
         void onPermissionDenied();
     }
 }
