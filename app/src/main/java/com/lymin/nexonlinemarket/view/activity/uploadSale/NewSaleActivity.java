@@ -12,8 +12,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,6 +43,7 @@ import com.lymin.nexonlinemarket.utils.LocationX;
 import com.lymin.nexonlinemarket.utils.Tools;
 import com.lymin.nexonlinemarket.view.BaseActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,6 +76,7 @@ public class NewSaleActivity extends BaseActivity {
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 uploadToFirebase();
             }
         });
@@ -518,24 +522,34 @@ public class NewSaleActivity extends BaseActivity {
         for (PhotoUpload model : list){
             count++;
            // final String name = manager.getImageName(model.getUri().getPath());
-            Uri uri = model.getUri();
-            progressDialog.setMessage("Uploading... ("+count+"/"+list.size()+")");
+            Uri uri = null;
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),model.getUri());
+                uri = Tools.compressImageUri(NewSaleActivity.this,bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (uri!=null){
 
-            final int finalCount = count;
-            FirebaseService.uploadImageToFireBaseStorage(NewSaleActivity.this,uri, new FirebaseService.OnCallBack() {
-                @Override
-                public void onUploadSuccess(String imageUrl) {
-                    urlList.add(imageUrl);
-                    if (finalCount==list.size()){
-                        submit();
+                progressDialog.setMessage("Uploading... ("+count+"/"+list.size()+")");
+
+                final int finalCount = count;
+                FirebaseService.uploadImageToFireBaseStorage(NewSaleActivity.this,uri, new FirebaseService.OnCallBack() {
+                    @Override
+                    public void onUploadSuccess(String imageUrl) {
+                        urlList.add(imageUrl);
+                        if (finalCount==list.size()){
+                            submit();
+                        }
                     }
-                }
 
-                @Override
-                public void onUploadFailed(Exception e) {
-                    e.printStackTrace();
-                }
-            });
+                    @Override
+                    public void onUploadFailed(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+
 
         }
 
@@ -563,9 +577,9 @@ public class NewSaleActivity extends BaseActivity {
                 ID,
                 user.getId(),
                 urlList.get(0),
-                "C"+binding.categoryUpload.getSelectedItem().toString(),
-                "T"+binding.spinnerCondition.getSelectedItem().toString(),
-                "T"+binding.typeUpload.getSelectedItem().toString(),
+                binding.categoryUpload.getSelectedItem().toString(),
+                binding.spinnerCondition.getSelectedItem().toString(),
+                binding.typeUpload.getSelectedItem().toString(),
                 binding.edName.getText().toString(),
                 user.getName(),
                 binding.edPrice.getText().toString(),
@@ -590,11 +604,11 @@ public class NewSaleActivity extends BaseActivity {
 
                         for (int i=0; i<urlList.size(); i++){
                             String url = urlList.get(i);
-                            int finalI = i;
+                            int finalI = i+1;
                             HashMap<String, String> hashMap = new HashMap<>();
-                            hashMap.put("Image"+i,url);
+                            hashMap.put("Image",url);
                             firestore.collection("Products").document(user.getId()).getParent()
-                                    .document("Images").collection(user.getId()).add(hashMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                    .document(documentReference.getId()).collection("Image").add(hashMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     if (finalI ==urlList.size()){

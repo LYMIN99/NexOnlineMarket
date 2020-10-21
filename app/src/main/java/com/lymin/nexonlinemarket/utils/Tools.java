@@ -11,12 +11,15 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -30,6 +33,8 @@ import androidx.core.content.ContextCompat;
 
 import com.lymin.nexonlinemarket.R;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -264,5 +269,32 @@ public class Tools {
         return distanceInMeters/1000;
     }
 
+    
+
+    public static Uri compressImageUri(Context context,Bitmap image) {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 90, baos);//Compression quality, here 100 means no compression, the storage of compressed data to baos
+        int options = 90;
+        while (baos.toByteArray().length / 1024 > 100) {  //Loop if compressed picture is greater than 400kb, than to compression
+            baos.reset();//Reset baos is empty baos
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);//The compression options%, storing the compressed data to the baos
+            options -= 10;//Every time reduced by 10
+        }
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//The storage of compressed data in the baos to ByteArrayInputStream
+        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//The ByteArrayInputStream data generation
+        Uri uri = null;
+        if (bitmap != null) {
+            uri = getImageUri(context, bitmap);
+        }
+        return uri;
+    }
+
+    public static Uri getImageUri(Context inContext, Bitmap inImage) {
+        //ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        //inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return  Uri.parse(path);
+    }
 
 }
