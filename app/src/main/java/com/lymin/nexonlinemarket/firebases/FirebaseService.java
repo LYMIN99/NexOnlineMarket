@@ -50,6 +50,25 @@ public class FirebaseService {
                 });
     }
 
+    public static void updateUser(UsersModel user){
+        // Create a new user with a first and last name
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(user.getId()).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "onSuccess: ");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
     public static void uploadImageToFireBaseStorage(Context context, Uri uri, final OnCallBack onCallBack){
         StorageReference riversRef = FirebaseStorage.getInstance().getReference().child("Images/Users" + System.currentTimeMillis()+"."+getFileExtention(context,uri));
         riversRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

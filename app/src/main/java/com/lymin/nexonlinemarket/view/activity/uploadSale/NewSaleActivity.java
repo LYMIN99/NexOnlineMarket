@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
@@ -522,33 +523,39 @@ public class NewSaleActivity extends BaseActivity {
         for (PhotoUpload model : list){
             count++;
            // final String name = manager.getImageName(model.getUri().getPath());
-            Uri uri = null;
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),model.getUri());
-                uri = Tools.compressImageUri(NewSaleActivity.this,bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (uri!=null){
-
-                progressDialog.setMessage("Uploading... ("+count+"/"+list.size()+")");
-
-                final int finalCount = count;
-                FirebaseService.uploadImageToFireBaseStorage(NewSaleActivity.this,uri, new FirebaseService.OnCallBack() {
-                    @Override
-                    public void onUploadSuccess(String imageUrl) {
-                        urlList.add(imageUrl);
-                        if (finalCount==list.size()){
-                            submit();
-                        }
-                    }
-
-                    @Override
-                    public void onUploadFailed(Exception e) {
+            int finalCount = count;
+            new Handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    Uri uri = null;
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(NewSaleActivity.this.getContentResolver(),model.getUri());
+                        uri = Tools.compressImageUri(NewSaleActivity.this,bitmap);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-                });
-            }
+                    if (uri!=null){
+
+                        progressDialog.setMessage("Uploading... ("+ finalCount +"/"+list.size()+")");
+
+                        FirebaseService.uploadImageToFireBaseStorage(NewSaleActivity.this,uri, new FirebaseService.OnCallBack() {
+                            @Override
+                            public void onUploadSuccess(String imageUrl) {
+                                urlList.add(imageUrl);
+                                if (finalCount==list.size()){
+                                    submit();
+                                }
+                            }
+
+                            @Override
+                            public void onUploadFailed(Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            });
+
 
 
         }
@@ -599,8 +606,6 @@ public class NewSaleActivity extends BaseActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getApplicationContext(),"OKaEEEE",Toast.LENGTH_SHORT).show();
-
 
                         for (int i=0; i<urlList.size(); i++){
                             String url = urlList.get(i);
@@ -612,8 +617,9 @@ public class NewSaleActivity extends BaseActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     if (finalI ==urlList.size()){
-                                        Toast.makeText(getApplicationContext(),"OKEEEEEEEEEEEE",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Upload success",Toast.LENGTH_SHORT).show();
                                         progressDialog.dismiss();
+                                        finish();
                                     }
                                 }
                             });

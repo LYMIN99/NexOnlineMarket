@@ -35,6 +35,8 @@ public class UsersRealm extends RealmObject {
         this.longitude = longitude;
     }
 
+
+
     public String getId() {
         return id;
     }

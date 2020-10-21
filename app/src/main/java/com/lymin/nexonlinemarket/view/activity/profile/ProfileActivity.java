@@ -13,18 +13,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lymin.nexonlinemarket.R;
 import com.lymin.nexonlinemarket.databinding.ActivityProfileBinding;
+import com.lymin.nexonlinemarket.managers.UsersManager;
+import com.lymin.nexonlinemarket.user.UsersRealm;
+import com.lymin.nexonlinemarket.utils.Tools;
+import com.lymin.nexonlinemarket.view.BaseActivity;
 import com.lymin.nexonlinemarket.view.activity.uploadSale.ChooseCategoriesActivity;
+import com.lymin.nexonlinemarket.view.activity.uploadSale.NewSaleActivity;
 import com.lymin.nexonlinemarket.view.fragments.OnSaleFragment;
 import com.lymin.nexonlinemarket.view.fragments.WishListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+import io.realm.Realm;
+
+public class ProfileActivity extends BaseActivity {
 
     private ActivityProfileBinding binding;
+    private FirebaseUser firebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +47,31 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
+        Tools.setSystemBarColor(this, R.color.grey_10);
+        Tools.setSystemBarLight(this);
+
         binding.btnNewSale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, ChooseCategoriesActivity.class));
+                startActivity(new Intent(ProfileActivity.this, NewSaleActivity.class));
             }
         });
+
+        initData();
     }
+
+    private void initData() {
+        Realm.init(this);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        UsersRealm user = new UsersManager().getUserInfo(firebaseUser.getUid());
+
+        binding.username.setText(user.getName());
+        binding.about.setText(user.getAbout());
+
+        Glide.with(this).load(user.getProfile()).into(binding.image);
+
+    }
+
 
     private void setUpWithViewPager(ViewPager viewPager){
         ProfileActivity.SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
