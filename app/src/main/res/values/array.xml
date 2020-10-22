@@ -429,29 +429,28 @@
 
     ///
     <string-array name="all_categories">
-        <item>Cars</item>
-        <item>Motorbike</item>
-        <item>Motors &amp; Accessories</item>
-        <item>Fashion &amp; Accessories</item>
-        <item>Real Estate</item>
+        <item>Mobile Phones</item>
+        <item>Tablets</item>
+        <item>Computers Desktop</item>
+        <item>Computers Laptop</item>
+        <item>Motorcycle or Vehicles</item>
 
-        <item>TV,Audio &amp; Cameras</item>
-        <item>Cell Phones &amp; Accessories</item>
-        <item>Computer &amp; Electronic</item>
-        <item>Sports &amp; Leisure</item>
         <item>Bikes</item>
+        <item>Cars or Auto</item>
+        <item>Electrics</item>
+        <item>Clothes</item>
+        <item>Houses</item>
 
-        <item>Game &amp; Console</item>
-        <item>Home &amp; Garden</item>
-        <item>Appliances</item>
-        <item>Movies, Books &amp; Music</item>
-        <item>Baby &amp; Child</item>
-
-        <item>Collectibles &amp; Art</item>
-        <item>Building materials</item>
-        <item>Agriculture &amp; Industrial</item>
+        <item>Lands</item>
         <item>Jobs</item>
         <item>Services</item>
+        <item>Books</item>
+        <item>Games</item>
+
+        <item>Toys</item>
+        <item>Sports</item>
+        <item>Foods or Restaurants</item>
+        <item>Pets</item>
 
         <item>Other</item>
     </string-array>
@@ -480,7 +479,6 @@
         <item>@drawable/ic_accessibility</item>
         <item>@drawable/ic_face</item>
         <item>@drawable/ic_child_friendly</item>
-        <item>@drawable/ic_weekend</item>
 
         <item>@drawable/ic_weekend</item>
     </integer-array>

@@ -22,8 +22,8 @@
             android:layout_width="@dimen/spacing_mxlarge"
             android:layout_height="@dimen/spacing_mxlarge"
             android:layout_gravity="center_vertical"
-            android:tint="@color/grey_60"
-            app:srcCompat="@drawable/ic_event" />
+            app:srcCompat="@drawable/ic_event"
+            app:tint="@color/grey_60" />
 
         <View
             android:layout_width="@dimen/spacing_mlarge"
@@ -48,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
+                    android:gravity="center_vertical"
                     android:paddingBottom="@dimen/spacing_middle"
                     android:paddingTop="@dimen/spacing_middle">
 
@@ -65,19 +66,20 @@
                         android:id="@+id/brief"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:layout_marginEnd="@dimen/spacing_middle"
                         android:layout_marginRight="@dimen/spacing_middle"
-                        android:layout_marginTop="@dimen/spacing_small"
                         android:maxLines="2"
                         android:text="Sub text"
+                        android:visibility="gone"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/grey_40" />
 
                 </LinearLayout>
 
                 <ImageButton
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:tint="@color/grey_40"
@@ -92,7 +94,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/grey_20" />
+                android:background="@color/grey_5" />
 
         </LinearLayout>
 

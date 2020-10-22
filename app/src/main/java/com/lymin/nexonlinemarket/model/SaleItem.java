@@ -1,5 +1,6 @@
 package com.lymin.nexonlinemarket.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaleItem {
@@ -22,7 +23,17 @@ public class SaleItem {
     private double latitude;
     private double longitude;
 
+    private List<PhotosSale> images = new ArrayList<>();
+
     public SaleItem() {
+    }
+
+    public List<PhotosSale> getImages() {
+        return images;
+    }
+
+    public void setImages(List<PhotosSale> images) {
+        this.images = images;
     }
 
     public SaleItem(String id, String sellerID, String thumbnail, String categoryID, String conditions, String typeID, String productName, String sellerName, String price, String dateTime, String time, String location, String description, String phoneNumbers, double latitude, double longitude) {

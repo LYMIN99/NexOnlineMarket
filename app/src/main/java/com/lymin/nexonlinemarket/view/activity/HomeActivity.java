@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new AdapterListShopCategory.OnItemClickListener() {
             @Override
             public void onItemClick(View view, ShopCategory obj, int position) {
-             startActivity(new Intent(HomeActivity.this, ShoppingActivity.class));
+             startActivity(new Intent(HomeActivity.this, ShoppingActivity.class).putExtra("cat",obj.title));
             }
         });
 

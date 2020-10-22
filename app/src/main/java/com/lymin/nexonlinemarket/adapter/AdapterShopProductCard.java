@@ -2,35 +2,31 @@ package com.lymin.nexonlinemarket.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.lymin.nexonlinemarket.R;
-import com.lymin.nexonlinemarket.view.activity.ShopCategory;
+import com.lymin.nexonlinemarket.model.PhotoUpload;
+import com.lymin.nexonlinemarket.model.SaleItem;
+import com.lymin.nexonlinemarket.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterListShopCategory extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterShopProductCard extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ShopCategory> items = new ArrayList<>();
-
+    private List<SaleItem> items = new ArrayList<>();
     private Context ctx;
-    private OnItemClickListener mOnItemClickListener;
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, ShopCategory obj, int position);
-    }
-
-    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
-        this.mOnItemClickListener = mItemClickListener;
-    }
-
-    public AdapterListShopCategory(Context context, List<ShopCategory> items) {
+    public AdapterShopProductCard(Context context, List<SaleItem> items) {
         this.items = items;
         ctx = context;
     }
@@ -38,14 +34,14 @@ public class AdapterListShopCategory extends RecyclerView.Adapter<RecyclerView.V
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView title;
-        public TextView brief;
+        public TextView price;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
             image = (ImageView) v.findViewById(R.id.image);
             title = (TextView) v.findViewById(R.id.title);
-            brief = (TextView) v.findViewById(R.id.brief);
+            price = (TextView) v.findViewById(R.id.price);
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
         }
     }
@@ -53,7 +49,7 @@ public class AdapterListShopCategory extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_shop_category, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_shop_product_card, parent, false);
         vh = new OriginalViewHolder(v);
         return vh;
     }
@@ -64,18 +60,18 @@ public class AdapterListShopCategory extends RecyclerView.Adapter<RecyclerView.V
         if (holder instanceof OriginalViewHolder) {
             OriginalViewHolder view = (OriginalViewHolder) holder;
 
-            ShopCategory p = items.get(position);
-            view.title.setText(p.title);
-           // view.brief.setText(p.brief);
-            view.image.setImageResource(p.image);
+            final SaleItem p = items.get(position);
+            view.title.setText(p.getProductName());
+            view.price.setText("USD $"+p.getPrice());
+            Glide.with(ctx).load(p.getThumbnail()).into(view.image);
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(view, items.get(position), position);
-                    }
+
                 }
             });
+
+
         }
     }
 
