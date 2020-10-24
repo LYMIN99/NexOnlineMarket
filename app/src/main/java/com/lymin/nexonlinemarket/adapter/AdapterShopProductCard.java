@@ -1,6 +1,7 @@
 package com.lymin.nexonlinemarket.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.lymin.nexonlinemarket.R;
 import com.lymin.nexonlinemarket.model.PhotoUpload;
 import com.lymin.nexonlinemarket.model.SaleItem;
 import com.lymin.nexonlinemarket.utils.Tools;
+import com.lymin.nexonlinemarket.view.activity.shop.SaleDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +69,7 @@ public class AdapterShopProductCard extends RecyclerView.Adapter<RecyclerView.Vi
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    ctx.startActivity(new Intent(ctx, SaleDetailActivity.class).putExtra("id",p.getId()));
                 }
             });
 

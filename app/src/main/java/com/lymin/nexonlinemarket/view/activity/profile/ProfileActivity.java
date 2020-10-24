@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,9 +67,13 @@ public class ProfileActivity extends BaseActivity {
         UsersRealm user = new UsersManager().getUserInfo(firebaseUser.getUid());
 
         binding.username.setText(user.getName());
-        binding.about.setText(user.getAbout());
+        if (!TextUtils.isEmpty(user.getAbout())) {
+            binding.about.setText(user.getAbout());
+        }
 
-        Glide.with(this).load(user.getProfile()).into(binding.image);
+        if (!TextUtils.isEmpty(user.getProfile())) {
+            Glide.with(this).load(user.getProfile()).into(binding.image);
+        }
 
     }
 

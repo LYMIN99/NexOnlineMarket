@@ -223,4 +223,15 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="about_this_item">About this item</string>
+    <string name="address">Address</string>
+    <string name="Date_post">Date post</string>
+    <string name="category">Category</string>
+    <string name="brand">Brand</string>
+    <string name="condition">Condtion</string>
+    <string name="description">Description</string>
+    <string name="short_lorem_ipsum">"This is descriopn tion .. I want too sennll "</string>
+    <string name="about_seller">About Seller</string>
+    <string name="phonenumber">Phone number</string>
+    <string name="prompt_email">Email</string>
 </resources>

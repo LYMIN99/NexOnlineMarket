@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.lymin.nexonlinemarket">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NexOnlineMarket">
-        <activity android:name=".view.activity.uploadSale.NewSaleActivity"></activity>
+        <activity android:name=".view.activity.shop.SaleDetailActivity"></activity>
+        <activity android:name=".view.activity.uploadSale.NewSaleActivity" />
         <activity android:name=".view.activity.uploadSale.ChooseCategoriesActivity" />
         <activity android:name=".view.activity.category.ShoppingActivity" />
         <activity android:name=".view.activity.profile.EditInfoActivity" />
@@ -34,6 +37,7 @@
         <activity android:name=".view.activity.StepperActivity" />
         <activity android:name=".view.activity.SignUpNameActivity" />
         <activity android:name=".view.activity.EnableLocationActivity" />
+        <activity android:name=".view.activity.SearchActivity" />
         <activity android:name=".view.activity.HomeActivity" />
     </application>
 

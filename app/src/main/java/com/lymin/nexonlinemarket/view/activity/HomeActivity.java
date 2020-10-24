@@ -50,6 +50,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
             }
         });
+        ((View)findViewById(R.id.ln_search)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,SearchActivity.class));
+            }
+        });
     }
 
     private void initComponent() {
